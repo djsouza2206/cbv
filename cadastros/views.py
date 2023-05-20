@@ -5,10 +5,9 @@ from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
 from braces.views import GroupRequiredMixin
 
-############# CREATE VIEW #############
+# ############ CREATE VIEW #############
 
-
-class CampoCreate(GroupRequiredMixin, LoginRequiredMixin, CreateView):
+class CampoCreate(GroupRequiredMixin, LoginRequiredMixin, CreateView):                          # noqa : E201
     login_url = reverse_lazy('login')
     group_required = u"Administrador"
     model = Campo
@@ -21,9 +20,9 @@ class CampoCreate(GroupRequiredMixin, LoginRequiredMixin, CreateView):
 
         url = super().form_valid(form)
 
-        # CASO QUEIRA ENVIAR MAIS ALGUM DADO EM ALGUM CAMPO QUE NÃO SEJA OBRIGATÓRIO
-        self.object.descricao += " TESTE"
-        self.object.save()
+        # CASO QUEIRA ENVIAR MAIS ALGUM DADO EM ALGUM CAMPO QUE NÃO SEJA OBRIGATÓRIO            # noqa : E201
+        # self.object.descricao += " TESTE"
+        # self.object.save()
         return url
 
 
@@ -35,7 +34,17 @@ class AtividadeCreate(GroupRequiredMixin, LoginRequiredMixin, CreateView):
     template_name = 'cadastros/form.html'
     success_url = reverse_lazy('listar-atividades')
 
-############# UPDATE VIEW #############
+    def form_valid(self, form):
+        form.instance.usuario = self.request.user
+
+        url = super().form_valid(form)
+
+        # CASO QUEIRA ENVIAR MAIS ALGUM DADO EM ALGUM CAMPO QUE NÃO SEJA OBRIGATÓRIO            # noqa : E201
+        # self.object.descricao += " TESTE"
+        # self.object.save()
+        return url
+
+# ############ UPDATE VIEW #############
 
 
 class CampoUpdate(GroupRequiredMixin, LoginRequiredMixin, UpdateView):
@@ -55,7 +64,7 @@ class AtividadeUpdate(GroupRequiredMixin, LoginRequiredMixin, UpdateView):
     template_name = 'cadastros/form.html'
     success_url = reverse_lazy('listar-atividades')
 
-############# DELETE VIEW #############
+# ############ DELETE VIEW #############
 
 
 class CampoDelete(GroupRequiredMixin, LoginRequiredMixin, DeleteView):
@@ -74,7 +83,7 @@ class AtividadeDelete(GroupRequiredMixin, LoginRequiredMixin, DeleteView):
     success_url = reverse_lazy('listar-atividades')
 
 
-############# LIST VIEW #############
+# ############ LIST VIEW #############
 class CampoList(LoginRequiredMixin, ListView):
     login_url = reverse_lazy('login')
     model = Campo

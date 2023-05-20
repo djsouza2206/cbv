@@ -2,15 +2,43 @@
 {% load static %}
 
 {% block content %}
-    <h3>Cadastro</h3>
-    <h6>Preencha todos os campos obrigatórios!</h6>
+    <h3>Lista de Atividades Registrados</h3>
+    
+    <div class="container">
 
-    <hr>
+        <a class="btn btn-primary" href="{% url 'cadastrar-atividade' %}">Adicionar Atividade</a>
+        <hr>
 
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button class="btn btn-primary" type="submit">Cadastrar</button>
-    </form>
+        <div class="table-responsive">
+            <table class="table table-striped table-striped-dark table-dark">
+                <tr>
+                    <th>Número</th>
+                    <th>Descrição</th>
+                    <th>Pontos</th>
+                    <th>Detalhes</th>
+                    <th>Campo</th>
+                    <th>Usuário</th>
+                    <th>Opções</th>
+                </tr>
+
+                {% for atividade in object_list  %}                                
+                    <tr>                
+                        <td>{{ atividade.numero }}</td>
+                        <td>{{ atividade.descricao }}</td>
+                        <td>{{ atividade.pontos }}</td>
+                        <td>{{ atividade.detalhes }}</td>
+                        <td>{{ atividade.campo }}</td>
+                        <td>{{ atividade.usuario }}</td>
+                        <td>
+                            <a href="{% url 'editar-atividade' atividade.pk %}"><i class="fas fa-edit  fa-lg"></i></a>
+                            <a href="{% url 'excluir-atividade' atividade.pk %}"><i class="fas fa-trash fa-lg"></i></a>
+                        </td>                
+                {% empty %}                
+                        <td colspan="3">Nenhum Registro encontrado</td>                                    
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
 
 {% endblock %}
