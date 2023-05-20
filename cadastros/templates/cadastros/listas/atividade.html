@@ -1,0 +1,16 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block content %}
+    <h3>Cadastro</h3>
+    <h6>Preencha todos os campos obrigatórios!</h6>
+
+    <hr>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button class="btn btn-primary" type="submit">Cadastrar</button>
+    </form>
+
+{% endblock %}
