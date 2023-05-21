@@ -129,7 +129,7 @@ class AtividadeDelete(GroupRequiredMixin, LoginRequiredMixin, DeleteView):
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
-        context['titulo'] = 'Excluir Atividade'        
+        context['titulo'] = 'Excluir Atividade'
         return context
 
     def get_object(self, queryset=None):
