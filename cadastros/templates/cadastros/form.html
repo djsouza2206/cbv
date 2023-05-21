@@ -3,7 +3,7 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
-    <h3>Cadastro</h3>
+    <h3>{{ titulo }}</h3>
     <h6>Preencha todos os campos obrigatórios!</h6>
 
     <hr>
@@ -11,7 +11,7 @@
     <form method="post">
         {% csrf_token %}
         {{ form|crispy }}
-        <button class="btn btn-primary" type="submit">Cadastrar</button>
+        <button class="btn btn-primary" type="submit">{{ botao }}</button>
         <a class="btn btn-primary" href="{% url 'index' %}">Cancelar</a>
     </form>
 
