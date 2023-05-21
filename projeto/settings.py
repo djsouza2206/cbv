@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'crispy_forms',
-    'crispy_bootstrap5',
+    'crispy_bootstrap5',    
+    'django_cleanup.apps.CleanupConfig',
     'core.apps.CoreConfig',
     'cadastros.apps.CadastrosConfig',
     'usuarios.apps.UsuariosConfig',
@@ -126,6 +127,9 @@ STATIC_URL = 'static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')       # Variável onde será salvo o arquivo                # noqa : E501
+MEDIA_URL = '/uploads/'                              # Variável que pego para listar os arquivos         # noqa : E501
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field

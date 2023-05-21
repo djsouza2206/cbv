@@ -16,7 +16,8 @@
                     <th>Descrição</th>
                     <th>Pontos</th>
                     <th>Detalhes</th>
-                    <th>Campo</th>
+                    <th>Campo</th>                    
+                    <th>Arquivo</th>
                     <th>Usuário</th>
                     <th>Opções</th>
                 </tr>
@@ -28,7 +29,9 @@
                         <td>{{ atividade.pontos }}</td>
                         <td>{{ atividade.detalhes }}</td>
                         <td>{{ atividade.campo }}</td>
+                        <td><a href="{{ atividade.arquivo }}">Ver</a></td>
                         <td>{{ atividade.usuario }}</td>
+
                         <td>
                             <a href="{% url 'editar-atividade' atividade.pk %}"><i class="fas fa-edit  fa-lg"></i></a>
                             <a href="{% url 'excluir-atividade' atividade.pk %}"><i class="fas fa-trash fa-lg"></i></a>

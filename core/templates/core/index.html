@@ -5,6 +5,17 @@
 
 {% block content %}
     <div class="container">
-        <h1>HOME</h1>   
+        <h1>HOME</h1>  
+        {% if request.user.is_authenticated %}        
+            {% if user.perfil.nome_completo != None %}
+                <h6>Seja bem-vindo, {{ user.perfil.nome_completo }}</h6>
+                <h6>{{ user.perfil.cpf }}</h6>
+                <h6>{{ user.perfil.logradouro }}</h6>
+                <h6>{{ user.perfil.nro }}</h6>
+                <h6>{{ user.perfil.telefone }}</h6>            
+            {% else %}
+                <h6>Por favor, complete seu cadastro: <a href="{% url 'atualizar-dados' %}">Meus Dados</a></h6>
+            {% endif %}
+        {% endif %}
     </div>
 {% endblock %}

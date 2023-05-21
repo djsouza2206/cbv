@@ -15,4 +15,23 @@
         <a class="btn btn-primary" href="{% url 'index' %}">Cancelar</a>
     </form>
 
+{% endblock %} 
+
+{% block scripts %}    
+    <script>
+        $(document).ready(function(){            
+            $('#id_cpf').mask('000.000.000-00', {reverse: true});
+            
+            var SPMaskBehavior = function (val) {
+                return val.replace(/\D/g, '').length === 11 ? '(00) 00000-0000' : '(00) 0000-00009';
+                },
+                spOptions = {
+                onKeyPress: function(val, e, field, options) {
+                    field.mask(SPMaskBehavior.apply({}, arguments), options);
+                    }
+                };
+                
+                $('#id_telefone').mask(SPMaskBehavior, spOptions);
+        });
+    </script>
 {% endblock %}

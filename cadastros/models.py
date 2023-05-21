@@ -20,6 +20,7 @@ class Atividade(models.Model):
     descricao = models.CharField(max_length=150, verbose_name="Descricão")
     pontos = models.DecimalField(max_digits=4, decimal_places=1)
     detalhes = models.CharField(max_length=100)
+    arquivo = models.FileField(upload_to="pdf/", null=False, blank=True)
 
     campo = models.ForeignKey(Campo, on_delete=models.PROTECT)
     usuario = models.ForeignKey(User, on_delete=models.PROTECT)

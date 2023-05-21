@@ -15,7 +15,7 @@ class CampoCreate(GroupRequiredMixin, LoginRequiredMixin, CreateView):          
     model = Campo
     fields = ['nome', 'descricao']
     template_name = 'cadastros/form.html'
-    success_url = reverse_lazy('listar-campos')
+    success_url = reverse_lazy('cadastrar-campo')
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
@@ -38,9 +38,9 @@ class AtividadeCreate(GroupRequiredMixin, LoginRequiredMixin, CreateView):
     login_url = reverse_lazy('login')
     group_required = u"Administrador"
     model = Atividade
-    fields = ['numero', 'descricao', 'pontos', 'detalhes', 'campo']
-    template_name = 'cadastros/form.html'
-    success_url = reverse_lazy('listar-atividades')
+    fields = ['numero', 'descricao', 'pontos', 'detalhes', 'campo', 'arquivo']
+    template_name = 'cadastros/form_atividade.html'
+    success_url = reverse_lazy('cadastrar-atividade')
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
