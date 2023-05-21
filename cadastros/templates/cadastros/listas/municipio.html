@@ -6,7 +6,7 @@
     
     <div class="container">
 
-        <a class="btn btn-primary" href="{% url 'cadastrar-atividade' %}">Adicionar Município</a>
+        <a class="btn btn-primary" href="{% url 'cadastrar-municipio' %}">Adicionar Município</a>
         <hr>
 
         <div class="table-responsive">
@@ -14,6 +14,7 @@
                 <thead>
                     <tr>
                         <th>ID</th>
+                        <th>UF</th>
                         <th>Cód UF</th>
                         <th>Cód Munic</th>
                         <th>Município</th>
@@ -27,6 +28,7 @@
                     {% for municipio in object_list  %}                                
                         <tr>                
                             <td>{{ municipio.pk }}</td>
+                            <td>{{ municipio.uf }}</td>
                             <td>{{ municipio.cod_uf }}</td>
                             <td>{{ municipio.cod_munic }}</td>
                             <td>{{ municipio.municipio }}</td>
@@ -42,14 +44,74 @@
                         </tr>
                     {% endfor %}
                 </tbody>
-
             </table>
+
         </div>
+
+
+
+
+
+        <ul class="pagination justify-content-end">
+            {% if page_obj.has_previous %}
+                {% if request.GET.nome %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page=1&nome={{ request.GET.nome }}"><i class="fa fa-angle-double-left"></i> Primeira</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ page_obj.previous_page_number }}&nome={{ request.GET.nome }}"><i class="fa fa-angle-left"></i> Anterior</a>
+                    </li>
+                {% else %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page=1"><i class="fa fa-angle-double-left"></i> Primeira</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ page_obj.previous_page_number }}"><i class="fa fa-angle-left"></i> Anterior</a>
+                    </li>
+                {% endif %}
+            {% endif %}
+            
+            <li class="page-item">
+                <span class="page-link">Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}.</span>
+            </li>
+            
+            {% if page_obj.has_next %}
+                {% if request.GET.nome %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ page_obj.next_page_number }}&nome={{ request.GET.nome }}">Próxima <i class="fa fa-angle-right"></i></a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}&nome={{ request.GET.nome }}">Última <i class="fa fa-angle-double-right"></i></a>
+                    </li>
+                {% else %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ page_obj.next_page_number }}">Próxima <i class="fa fa-angle-right"></i></a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">Última <i class="fa fa-angle-double-right"></i></a>
+                    </li>
+                {% endif %}
+            {% endif %}
+        </ul>
+        
+
+
+       
+        
+
+
+
+        
+        
+
+
+
+
     </div>
 
 {% endblock %}
 
-{% block scripts %}
+{% comment %} {% block scripts %}
     <script>
         $(document).ready(function() {            
             $('#tabela-listar').DataTable({
@@ -86,4 +148,4 @@
 
         });
     </script>
-{% endblock %}
+{% endblock %} {% endcomment %}

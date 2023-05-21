@@ -64,7 +64,7 @@ class MunicipioCreate(GroupRequiredMixin, LoginRequiredMixin, CreateView):      
     model = Municipio
     fields = ['uf', 'cod_uf', 'cod_munic', 'municipio', 'populacao', 'usuario']
     template_name = 'cadastros/form.html'
-    success_url = reverse_lazy('cadastrar-municipip')
+    success_url = reverse_lazy('cadastrar-municipio')
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
@@ -224,6 +224,7 @@ class MunicipioList(LoginRequiredMixin, ListView):
     login_url = reverse_lazy('login')
     model = Municipio
     template_name = 'cadastros/listas/municipio.html'
+    paginate_by = 10
 
     def get_queryset(self):
         self.object_list = Municipio.objects.filter(usuario=self.request.user)
