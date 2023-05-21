@@ -227,5 +227,11 @@ class MunicipioList(LoginRequiredMixin, ListView):
     paginate_by = 10
 
     def get_queryset(self):
-        self.object_list = Municipio.objects.filter(usuario=self.request.user)
-        return self.object_list
+        busca = self.request.GET.get('nome')
+
+        if busca:
+            municipios = Municipio.objects.filter(municipio__icontains=busca,usuario=self.request.user)         # noqa : E501            
+        else:
+            municipios = Municipio.objects.filter(usuario=self.request.user)                            # noqa : E501
+
+        return municipios

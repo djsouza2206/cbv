@@ -4,6 +4,15 @@
 {% block content %}
     <h3>Lista de Municípios Registrados</h3>
     
+    <form action="?" method="get">
+        <input class="p-1 border" type="text" name="nome" id="" value="{{ request.GET.nome }}" autocomplete="off" placeholder="Faça a busca">
+
+        <button class="btn btn-success"type="submit">Buscar</button>
+        <a class="btn btn-light" href="{% url 'listar-municipios' %}">Cancelar</a>
+    </form>
+
+    <hr>
+
     <div class="container">
 
         <a class="btn btn-primary" href="{% url 'cadastrar-municipio' %}">Adicionar Município</a>
@@ -51,7 +60,6 @@
 
 
 
-
         <ul class="pagination justify-content-end">
             {% if page_obj.has_previous %}
                 {% if request.GET.nome %}
@@ -94,16 +102,6 @@
             {% endif %}
         </ul>
         
-
-
-       
-        
-
-
-
-        
-        
-
 
 
 
